@@ -624,12 +624,14 @@ const s3ContentTypes = {
 export async function uploadToS3(
   data: string,
   contentType: string,
+  filePath: string,
 ): Promise<string> {
   const s3ContentType = s3ContentTypes[contentType]
   if (!s3ContentType) {
     throw new Error(`Unknown S3 Content type ${contentType}`)
   }
-  const s3Path = `${getS3ObjectKeyPrefix()}${cuid()}.${s3ContentType.extension}`
+  const s3FilePath = filePath || cuid();
+  const s3Path = `${getS3ObjectKeyPrefix()}${s3FilePath}.${s3ContentType.extension}`
   const s3 = new AWS.S3()
   await s3
     .putObject({

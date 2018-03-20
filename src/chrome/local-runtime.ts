@@ -410,7 +410,7 @@ export default class LocalRuntime {
     const data = await screenshot(this.client, selector)
 
     if (isS3Configured()) {
-      return await uploadToS3(data, 'image/png')
+      return await uploadToS3(data, 'image/png', options && options.filePath)
     } else {
       return writeToFile(data, 'png', options && options.filePath)
     }
@@ -424,7 +424,7 @@ export default class LocalRuntime {
     const data = await html(this.client)
 
     if (isS3Configured()) {
-      return await uploadToS3(data, 'text/html')
+      return await uploadToS3(data, 'text/html', options && options.filePath)
     } else {
       return writeToFile(data, 'html', options && options.filePath)
     }
@@ -436,7 +436,7 @@ export default class LocalRuntime {
     const data = await pdf(this.client, cdpOptions)
 
     if (isS3Configured()) {
-      return await uploadToS3(data, 'application/pdf')
+      return await uploadToS3(data, 'application/pdf', filePath)
     } else {
       return writeToFile(data, 'pdf', filePath)
     }
