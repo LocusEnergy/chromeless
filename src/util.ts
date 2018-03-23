@@ -15,13 +15,16 @@ import * as CDP from 'chrome-remote-interface'
 import * as AWS from 'aws-sdk'
 
 export const version: string = ((): string => {
-  const developmentPath = path.join(__dirname, '../package.json');
-  const productionPath = path.join(__dirname, '../../package.json');
-  return JSON.parse(
-    fs.readFileSync(
-      fs.existsSync(developmentPath) ? developmentPath : productionPath
-    ).toString()
-  ).version
+  // below was causing too many difficulties
+  //
+  // const developmentPath = path.join(__dirname, '../package.json');
+  // const productionPath = path.join(__dirname, '../../package.json');
+  // return JSON.parse(
+  //   fs.readFileSync(
+  //     fs.existsSync(developmentPath) ? developmentPath : productionPath
+  //   ).toString()
+  // ).version
+  return '1.4.0';
 })()
 
 export async function setViewport(

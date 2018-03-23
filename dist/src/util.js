@@ -50,9 +50,16 @@ var cuid = require("cuid");
 var CDP = require("chrome-remote-interface");
 var AWS = require("aws-sdk");
 exports.version = (function () {
-    var developmentPath = path.join(__dirname, '../package.json');
-    var productionPath = path.join(__dirname, '../../package.json');
-    return JSON.parse(fs.readFileSync(fs.existsSync(developmentPath) ? developmentPath : productionPath).toString()).version;
+    // below was causing too many difficulties
+    //
+    // const developmentPath = path.join(__dirname, '../package.json');
+    // const productionPath = path.join(__dirname, '../../package.json');
+    // return JSON.parse(
+    //   fs.readFileSync(
+    //     fs.existsSync(developmentPath) ? developmentPath : productionPath
+    //   ).toString()
+    // ).version
+    return '1.4.0';
 })();
 function setViewport(client, viewport) {
     if (viewport === void 0) { viewport = { width: 1, height: 1, scale: 1 }; }
